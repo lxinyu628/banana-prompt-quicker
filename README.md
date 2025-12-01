@@ -4,7 +4,7 @@
 * [Gemini 官网](https://gemini.google.com/)
 * [Google AI Studio](https://aistudio.google.com/)
 * [Gemini Enterprise](https://business.gemini.google/)
-* [kokorolab](https://kokorolab.net/zh/home) 👈🏻 金主爸爸。欢迎更多垂类生图场景的应用合作！
+* [kokorolab](https://kokorolab.net/zh/home?referral=JBM9AGUV) 👈🏻 金主爸爸。欢迎更多垂类生图场景的应用合作！
 * 任意网站输入框，右键插入！
 * 扩展中...
 
