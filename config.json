@@ -21,7 +21,7 @@
             {
                 "host": "chatfire.site",
                 "promptInput": "#app > div > div.layout-wrapper > div.content-wrapper > div > main > div > div > div.material-input-container.shadow-sm > div.input-wrapper > div.flex.mb-2 > div.n-input.n-input--textarea.n-input--autosize.n-input--stateful.prompt-input > div.n-input-wrapper > div.n-input__textarea.n-scrollbar > textarea",
-                "insertButton": "#app > div > div.layout-wrapper > div.content-wrapper > div > main > div > div > div.material-input-container.shadow-sm > div.input-wrapper > div.footer.flex.justify-between.items-center > div.submit-button"
+                "insertButton": "#app > div > div.layout-wrapper > div.content-wrapper > div > main > div > div > div.material-input-container.shadow-sm > div.input-wrapper > div.footer.flex.justify-between.items-center > div.credit-cost-display"
             }
         ]
     },
