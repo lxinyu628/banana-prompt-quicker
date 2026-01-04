@@ -143,9 +143,6 @@ window.UI.Pagination = class PaginationComponent {
         // Social Links
         const socialContainer = this.createSocialLinks();
 
-        // Sponsor Link
-        const sponsorContainer = this.createSponsorLink();
-
         // Announcement
         const announcementContainer = h('div', {
             id: 'pagination-announcement',
@@ -156,7 +153,7 @@ window.UI.Pagination = class PaginationComponent {
         if (mobile) {
             this.element = h('div', {
                 style: `padding: 12px; border-top: 1px solid ${colors.border}; display: flex; flex-direction: column; align-items: center; gap: 12px; background: ${colors.surface}; border-radius: 0;`
-            }, [controlsWrapper, announcementContainer, socialContainer, sponsorContainer]);
+            }, [controlsWrapper, announcementContainer, socialContainer]);
         } else {
             // Desktop: Controls Absolute Center
             controlsWrapper.style.position = 'absolute';
@@ -165,7 +162,7 @@ window.UI.Pagination = class PaginationComponent {
 
             const leftWrapper = h('div', {
                 style: 'display: flex; align-items: center; gap: 16px;'
-            }, [sponsorContainer, announcementContainer]);
+            }, [announcementContainer]);
 
             const rightWrapper = h('div', {
                 style: 'display: flex; align-items: center; gap: 16px;'
@@ -254,95 +251,6 @@ window.UI.Pagination = class PaginationComponent {
         socialContainer.appendChild(xhsLink);
 
         return socialContainer;
-    }
-
-    createSponsorLink() {
-        const { h } = window.DOM;
-        const { colors, mobile } = this;
-
-        const sponsorContainer = h('div', {
-            style: `display: flex; align-items: center; position: relative; ${mobile ? 'order: 3; margin-top: 4px;' : ''}`
-        });
-
-        const sponsorText = h('span', {
-            innerHTML: '☕ 请喝奶茶',
-            style: `color: ${colors.textSecondary}; font-size: ${mobile ? '12px' : '13px'}; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; font-weight: 500; opacity: 0.8;`
-        });
-
-        // QR Code Popup
-        const qrPopup = h('div', {
-            style: `
-                position: fixed;
-                padding: 12px;
-                background: ${colors.surface};
-                border: 1px solid ${colors.border};
-                border-radius: 16px;
-                box-shadow: 0 10px 40px ${colors.shadow};
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 10000;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-                backdrop-filter: blur(20px);
-            `
-        });
-
-        const qrImg = h('img', {
-            src: 'https://cdn.jsdelivr.net/gh/glidea/banana-prompt-quicker@main/images/sponsor.png',
-            alt: 'Payment QR Code',
-            style: 'width: 140px; height: 140px; display: block; border-radius: 8px;'
-        });
-
-        const qrTip = h('span', {
-            style: `font-size: 12px; color: ${colors.textSecondary};`
-        }, '感谢支持 ❤️');
-
-        qrPopup.appendChild(qrImg);
-        qrPopup.appendChild(qrTip);
-
-        let hideTimeout;
-
-        sponsorContainer.onmouseenter = () => {
-            clearTimeout(hideTimeout);
-            document.body.appendChild(qrPopup);
-            this.currentQrPopup = qrPopup;
-
-            const rect = sponsorText.getBoundingClientRect();
-            const popupRect = qrPopup.getBoundingClientRect();
-            let left = rect.left + (rect.width / 2) - (popupRect.width / 2);
-            const minLeft = 16;
-            const maxLeft = window.innerWidth - popupRect.width - 16;
-            if (left < minLeft) left = minLeft;
-            if (left > maxLeft) left = maxLeft;
-            let top = rect.top - popupRect.height - 16;
-            qrPopup.style.left = `${left}px`;
-            qrPopup.style.top = `${top}px`;
-            qrPopup.offsetHeight;
-            qrPopup.style.opacity = '1';
-            sponsorText.style.color = colors.primary;
-            sponsorText.style.opacity = '1';
-        };
-
-        sponsorContainer.onmouseleave = () => {
-            sponsorText.style.color = colors.textSecondary;
-            sponsorText.style.opacity = '0.8';
-            qrPopup.style.opacity = '0';
-            hideTimeout = setTimeout(() => {
-                if (qrPopup.parentNode) {
-                    qrPopup.parentNode.removeChild(qrPopup);
-                }
-                if (this.currentQrPopup === qrPopup) {
-                    this.currentQrPopup = null;
-                }
-            }, 300);
-        };
-
-        sponsorContainer.appendChild(sponsorText);
-
-        return sponsorContainer;
     }
 
     cleanup() {
