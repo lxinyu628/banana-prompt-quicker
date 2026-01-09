@@ -948,8 +948,8 @@
 
         .announcement-wrapper {
             position: relative;
-            background: linear-gradient(135deg, rgba(0, 113, 227, 0.08) 0%, rgba(52, 199, 89, 0.08) 100%);
-            border: 1px solid rgba(0, 113, 227, 0.15);
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: var(--radius-md);
             padding: 14px 20px;
             overflow: hidden;
@@ -957,13 +957,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .announcement-wrapper {
-                background: linear-gradient(135deg, rgba(41, 151, 255, 0.1) 0%, rgba(52, 199, 89, 0.1) 100%);
-                border-color: rgba(41, 151, 255, 0.2);
-            }
         }
 
         .announcement-item {
@@ -977,11 +970,13 @@
             transform: translate(-50%, -50%);
             width: calc(100% - 40px);
             opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
 
         .announcement-item.active {
             opacity: 1;
+            pointer-events: auto;
             position: relative;
             top: auto;
             left: auto;
@@ -991,25 +986,12 @@
         .announcement-icon {
             flex-shrink: 0;
             font-size: 16px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
         }
 
         .announcement-text {
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-align: center;
             line-height: 1.4;
         }
@@ -1019,6 +1001,8 @@
             text-decoration: none;
             cursor: pointer;
             transition: color 0.2s;
+            position: relative;
+            z-index: 1;
         }
 
         .announcement-link:hover {
